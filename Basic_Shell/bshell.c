@@ -15,9 +15,9 @@ char* read_line(void){
 
 //LOOP
 int main(void){
-	char *line;
+	char *line=NULL;
 	while(1){
-	p(BGREEN"bshell"RST CYAN" > "RST); 
+	p(BGREEN"bshell"RST CYAN">"RST " "); 
 	fflush(stdout);
 		line = read_line();
 		if(line==NULL) break;

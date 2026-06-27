@@ -13,16 +13,57 @@ char* read_line(void){
 	return buf;
 }
 
+//Tokenization
+char ** tokenize(char* line){
+	int cap = 16;
+	char ** tokens = malloc(cap*sizeof(char*));
+	int i =0;
+	char* tok = strtok(line," \t");
+	while(tok!=NULL){
+		tokens[i++]=tok;
+		if(i>=cap-1){
+			cap*=2;
+			tokens = realloc(tokens,cap*sizeof(char *));
+		}
+		tok = strtok(NULL," \t");
+	}
+	
+	tokens[i]=NULL;
+	return tokens;
+}
+
+//EXECUTE
+void execute(char** args){
+	int status;
+	int rc = fork();
+	if(rc<0){
+		fprintf(stderr,"Fork failed");
+		exit(1);
+	}
+	else if(rc ==0){
+		execvp(args[0],args);
+		perror("execvp");
+		exit(EXIT_FAILURE);
+	}
+	else{
+		wait(&status);
+	}
+}
+
 //LOOP
 int main(void){
 	char *line=NULL;
+	char ** args = NULL;
 	while(1){
 	p(BGREEN"bshell"RST CYAN">"RST " "); 
 	fflush(stdout);
 		line = read_line();
 		if(line==NULL) break;
+		args = tokenize(line);
 
-	
+		execute(args);
+
+	free(args);
 	free(line);
 	}
 	return EXIT_SUCCESS;

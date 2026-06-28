@@ -50,6 +50,23 @@ void execute(char** args){
 	}
 }
 
+//hendling the builtins like cd , exit()
+int handle_builtins(char** args){
+	if(strcmp(args[0],"cd")==0){
+		//if cd with  no arguements 
+		if(args[1]==NULL){
+			chdir(getenv("HOME"));
+		}
+		else{
+			if(chdir(args[1])==-1){
+				perror("cd failed");
+			}
+		}
+		return 1;
+	}
+	return 0;
+}
+
 //LOOP
 int main(void){
 	char *line=NULL;
@@ -61,7 +78,10 @@ int main(void){
 		if(line==NULL) break;
 		args = tokenize(line);
 
-		execute(args);
+		if(handle_builtins(args)==0){
+			execute(args);
+		}
+
 
 	free(args);
 	free(line);

@@ -86,7 +86,7 @@ int find_pipe(char ** args){
 			return i;
 		}
 	}
-	return -1
+	return -1;
 }
 
 //executing pipe
@@ -121,6 +121,16 @@ void execute_pipe(char** args, int pipe_index){
 
 }
 
+//find redirect
+int find_redirect(char** args,char* symbol){
+	for(int i = 0;args[i]!=NULL;i++){
+		if(strcmp(args[i],symbol)==0){
+			return i;
+		}
+	}
+	return -1;
+}
+
 //LOOP
 int main(void){
 	char *line=NULL;
@@ -133,7 +143,13 @@ int main(void){
 		args = tokenize(line);
 
 		if(handle_builtins(args)==0){
+			int pi = find_pipe(args);
+			if(pi!=-1){
+				execute_pipe(args,pi);
+			}
+			else{
 			execute(args);
+			}
 		}
 
 

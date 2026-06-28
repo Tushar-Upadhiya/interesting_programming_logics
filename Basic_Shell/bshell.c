@@ -131,6 +131,29 @@ int find_redirect(char** args,char* symbol){
 	return -1;
 }
 
+//execution of redirection
+void execute_redirect(char** args){
+	int ri;
+	int fd;
+	ri = find_redirect(args,">");
+	if(ri !=-1){
+		int fd = open(args[ri+1],O_WRONLY|O_CREAT|O_TRUNC,0644);
+		int rc = fork();
+		if(rc==0){
+			dup2(fd,1);
+			close(fd);
+			args[ri]=NULL;
+			execvp(args[0],args);
+			perror("execvp");
+			exit(EXIT_FAILURE);
+		}
+		else{
+			close(fd);
+			wait(NULL);
+		}
+	}
+}
+
 //LOOP
 int main(void){
 	char *line=NULL;

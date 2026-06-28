@@ -3,6 +3,7 @@
 #include<string.h>
 #include<stdio.h>
 #include<unistd.h>
+#include<fcntl.h>
 #include<sys/wait.h>
 #define p(...) printf(__VA_ARGS__)
 #define RST   "\033[0m"

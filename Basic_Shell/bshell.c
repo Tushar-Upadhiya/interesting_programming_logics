@@ -70,12 +70,23 @@ int handle_builtins(char** args){
 	if(strcmp(args[0],"exit")==0){
 		//if exit with no arguement
 		if(args[1]==NULL){
-			chdir(getenv());
+			exit(0);
 		}
 		else{
+			exit(atoi(args[1]));
 		}
 	}
 	return 0;
+}
+
+//finding pipe
+int find_pipe(char ** args){
+	for(int i=0;args[i]!=NULL;i++){
+		if(strcmp(args[i],"|")==0){
+			return i;
+		}
+	}
+	return -1
 }
 
 //LOOP

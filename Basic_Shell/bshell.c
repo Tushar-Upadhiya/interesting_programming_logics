@@ -50,8 +50,9 @@ void execute(char** args){
 	}
 }
 
-//hendling the builtins like cd , exit()
+//hendling the builtins like cd , exit
 int handle_builtins(char** args){
+	//handling cd
 	if(strcmp(args[0],"cd")==0){
 		//if cd with  no arguements 
 		if(args[1]==NULL){
@@ -63,6 +64,16 @@ int handle_builtins(char** args){
 			}
 		}
 		return 1;
+	}
+
+	//handling exit
+	if(strcmp(args[0],"exit")==0){
+		//if exit with no arguement
+		if(args[1]==NULL){
+			chdir(getenv());
+		}
+		else{
+		}
 	}
 	return 0;
 }

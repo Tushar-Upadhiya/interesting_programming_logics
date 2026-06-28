@@ -89,6 +89,38 @@ int find_pipe(char ** args){
 	return -1
 }
 
+//executing pipe
+void execute_pipe(char** args, int pipe_index){
+	int fd[2];
+	pipe(fd);
+	int left = fork();
+	//executing the left side of the pipe
+	if (left==0){
+		dup2(fd[1],1);
+		close(fd[0]);
+		args[pipe_index]=NULL;
+		execvp(args[0],args);
+		perror("execvp left");
+		exit(EXIT_FAILURE);
+	}
+	//executing the right side of the pipe
+	int right = fork();
+	if(right == 0){
+		dup2(fd[0],0);
+		close(fd[1]);
+		execvp(args[pipe_index+1],args+pipe_index+1);
+		perror("execvp right");
+		exit(EXIT_FAILURE);
+
+	}
+
+	close(fd[0]);
+	close(fd[1]);
+	wait(NULL);
+	wait(NULL);
+
+}
+
 //LOOP
 int main(void){
 	char *line=NULL;

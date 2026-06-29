@@ -39,13 +39,7 @@ grep bshell < out.txt
 
 ### Built-in cd
 
-[screenshot: type these in order →
-pwd
-cd /tmp
-pwd
-cd
-pwd
-]
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/38fe41061bba546f0f4fa154c69c214d5718d822)
 
 ### Error Handling
 

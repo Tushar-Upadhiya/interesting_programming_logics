@@ -21,24 +21,24 @@ A custom Unix shell built from scratch in C as part of learning systems programm
 
 ### Basic Commands
 
-![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/48e83f67eb2e1c22188bf66cb56b6ea78bbef475)
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/screenshots/48e83f67eb2e1c22188bf66cb56b6ea78bbef475)
 
 ### Pipes
 
-![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/fbba10921de1f3f65857f2a5277d0783bd566fb0)
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/screenshots/fbba10921de1f3f65857f2a5277d0783bd566fb0)
 
 ### Redirection
 
-![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/645872d9f9da886a6e3ac5cf434375dc40cd9429)
-![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/b75aea4531d5371920226e55e7504bbde519abf8)
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/screenshots/645872d9f9da886a6e3ac5cf434375dc40cd9429)
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/screenshots/b75aea4531d5371920226e55e7504bbde519abf8)
 
 ### Built-in cd
 
-![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/38fe41061bba546f0f4fa154c69c214d5718d822)
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/screenshots/38fe41061bba546f0f4fa154c69c214d5718d822)
 
 ### Error Handling
 
-![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/a891bc126a7585f9f74f6d8847aec247bb4c25ca)
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/screenshots/a891bc126a7585f9f74f6d8847aec247bb4c25ca)
 
 ---
 

@@ -111,14 +111,12 @@ void execute_pipe(char** args, int pipe_index){
 		execvp(args[pipe_index+1],args+pipe_index+1);
 		perror("execvp right");
 		exit(EXIT_FAILURE);
-
 	}
 
 	close(fd[0]);
 	close(fd[1]);
 	wait(NULL);
 	wait(NULL);
-
 }
 
 //find redirect
@@ -187,8 +185,6 @@ void execute_redirect(char** args){
 			wait(NULL);
 		}
 	}
-
-
 }
 
 //LOOP

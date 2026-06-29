@@ -37,7 +37,7 @@ A custom Unix shell built from scratch in C as part of learning systems programm
 
 ### Error Handling
 
-[screenshot: type → cd /fakepath    (shows "cd failed: No such file or directory")]
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/a891bc126a7585f9f74f6d8847aec247bb4c25ca)
 
 ---
 

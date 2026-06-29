@@ -2,7 +2,7 @@
 
 A custom Unix shell built from scratch in C as part of learning systems programming and OS internals (OSTEP).
 
-
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/Screenshot_20260629_084232.png)
 
 ---
 

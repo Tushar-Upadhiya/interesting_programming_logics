@@ -25,7 +25,7 @@ A custom Unix shell built from scratch in C as part of learning systems programm
 
 ### Pipes
 
-[screenshot: type → ls -l | grep bshell]
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/fbba10921de1f3f65857f2a5277d0783bd566fb0)
 
 ### Redirection
 

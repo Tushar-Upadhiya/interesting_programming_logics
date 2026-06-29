@@ -29,7 +29,7 @@ A custom Unix shell built from scratch in C as part of learning systems programm
 
 ### Redirection
 
-![Image Alt](file:///home/Tushar/differential_drive_robot/arena/645872d9f9da886a6e3ac5cf434375dc40cd9429)
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/645872d9f9da886a6e3ac5cf434375dc40cd9429)
 
 ### Built-in cd
 

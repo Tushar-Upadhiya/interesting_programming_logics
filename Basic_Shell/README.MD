@@ -21,7 +21,7 @@ A custom Unix shell built from scratch in C as part of learning systems programm
 
 ### Basic Commands
 
-[screenshot: type these commands one by one → ls | pwd | echo "hello world"]
+![Image Alt](https://github.com/Tushar-Upadhiya/interesting_programming_logics/blob/main/Basic_Shell/48e83f67eb2e1c22188bf66cb56b6ea78bbef475)
 
 ### Pipes
 

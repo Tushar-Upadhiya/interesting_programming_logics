@@ -44,8 +44,8 @@ A custom Unix shell built from scratch in C as part of learning systems programm
 ## Build
 
 ```bash
-gcc -Wall -o bshell bshell.c
-./bshell
+gcc -Wall -Wextra -o bshell.out bshell.c
+./bshell.out
 ```
 
 ---

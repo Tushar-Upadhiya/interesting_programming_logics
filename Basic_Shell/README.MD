@@ -29,13 +29,7 @@ A custom Unix shell built from scratch in C as part of learning systems programm
 
 ### Redirection
 
-[screenshot: type these in order →
-echo "hello from bshell" > out.txt
-cat out.txt
-echo "second line" >> out.txt
-cat out.txt
-grep bshell < out.txt
-]
+![Image Alt](file:///home/Tushar/differential_drive_robot/arena/645872d9f9da886a6e3ac5cf434375dc40cd9429)
 
 ### Built-in cd
 

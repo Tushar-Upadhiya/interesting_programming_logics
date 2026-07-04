@@ -21,3 +21,5 @@ typedef struct{
 
 Task* task_create(int id, char*name,void* (*func)(void *),void* arg,int priority);
 void task_destroy(Task* task);
+void scheduler_add(Task*task);
+void scheduler_run();

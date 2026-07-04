@@ -21,7 +21,3 @@ void scheduler_run(){
 	}
 }
 
-int main(){
-
-	return EXIT_SUCCESS;
-}

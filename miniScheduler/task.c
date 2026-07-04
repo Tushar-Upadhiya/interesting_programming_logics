@@ -22,6 +22,3 @@ void task_destroy(Task* task){
 	}
 }
 
-int main(){
-	return EXIT_SUCCESS;
-}

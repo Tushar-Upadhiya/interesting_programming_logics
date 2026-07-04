@@ -1,6 +1,9 @@
 #pragma once
 #include<pthread.h>
-
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<string.h>
 typedef enum{
 	READY,RUNNING,BLOCKED,DONE
 } TaskState;

@@ -11,7 +11,8 @@ Task *task_create(int id,char* name,void* (*func)(void* ),void * arg,int priorit
 	task-> arg = arg;
 	task-> priority = priority;
 	task->state = READY;
-	strncpy (task-> name,name,22);
+	strncpy (task-> name,name,31);
+	task->name[31]='\0';
 	return task;
 }
 

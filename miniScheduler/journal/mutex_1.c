@@ -8,13 +8,13 @@ void *increment(void* arg){
 	for(int i =0;i<1000;i++){
 		pthread_mutex_lock(&lock);
 		counter++;
-		ptrhead_mutex_unlock(&lock);
+		pthread_mutex_unlock(&lock);
 	}
 	return NULL;
 }
 
 int main(){
-	ptheread_mutex_init(&lock,NULL);
+	pthread_mutex_init(&lock,NULL);
 	pthread_t t1,t2;
 	
 	pthread_create(&t1,NULL,increment,NULL);

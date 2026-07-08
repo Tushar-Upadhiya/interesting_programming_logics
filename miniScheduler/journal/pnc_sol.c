@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<pthread.h>
-i
+
 #define buffer_size 5
 
 int buffer[buffer_size];
@@ -15,7 +15,7 @@ void* producer(void* arg){
 	for(int i =0;i<10;i++){
 		pthread_mutex_lock(&lock);
 		while(count==buffer_size){
-			pthread_cond_wait(&not_empty,&lock);
+			pthread_cond_wait(&not_full,&lock);
 		}
 			buffer[count]=i;
 			count++;
@@ -30,7 +30,7 @@ void* consumer(void* arg){
 	for(int i =0;i<10;i++){
 		pthread_mutex_lock(&lock);
 		while(count==0){
-			pthread_cond_wait(&not_full,&lock);
+			pthread_cond_wait(&not_empty,&lock);
 		}
 			int item = buffer[count-1];
 			count--;

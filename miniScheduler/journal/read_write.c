@@ -4,6 +4,7 @@
 #include<pthread.h>
 
 int reader_count = 0;
+int writer_count=0;
 pthread_mutex_t mutex;
 pthread_rwlock_t rwlock= PTHREAD_RWLOCK_INITIALIZER;
 
@@ -41,6 +42,27 @@ void* reader(void* arg){
 	reader_count--;
 	if(reader_count==0){
 		write_unlock();
+	}
+	pthread_mutex_unlock(&mutex);
+
+	return NULL;
+}
+
+void* writer(void* arg){
+	pthread_mutex_lock(&mutex);
+	writer_count++;
+	if(writer_count==1){
+		read_lock();
+	}
+	pthread_mutex_unlock(&mutex);
+
+	printf("Writer %d is writing",*(int*)arg);
+	sleep(1);
+
+	pthread_mutex_lock(&mutex);
+	writer_count--;
+	if(writer_count==0){
+		read_unlock();
 	}
 	pthread_mutex_unlock(&mutex);
 

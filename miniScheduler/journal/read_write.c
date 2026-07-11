@@ -4,44 +4,27 @@
 #include<pthread.h>
 
 int reader_count = 0;
-int writer_count=0;
 pthread_mutex_t mutex;
-pthread_rwlock_t rwlock= PTHREAD_RWLOCK_INITIALIZER;
+pthread_mutex_t write_lock= PTHREAD_MUTEX_INITIALIZER;
 
-void read_lock(){
-	pthread_rwlock_rdlock(&rwlock);
-}
-
-
-void read_unlock(){
-	pthread_rwlock_unlock(&rwlock);
-}
-
-void write_lock(){
-	pthread_rwlock_wrlock(&rwlock);
-}
-
-void write_unlock(){
-	pthread_rwlock_unlock(&rwlock);
-}
 
 void* reader(void* arg){
 	pthread_mutex_lock(&mutex);
 	reader_count++;
 	if(reader_count==1){
-		write_lock();
+		pthread_mutex_lock(&write_lock);
 	}
 	pthread_mutex_unlock(&mutex);
 
 	//read
 	
-	printf("Reader %d is reading!",*(int*)arg);
+	printf("Reader %d is reading!\n",*(int*)arg);
 	sleep(1);
 
 	pthread_mutex_lock(&mutex);
 	reader_count--;
 	if(reader_count==0){
-		write_unlock();
+		pthread_mutex_unlock(&write_lock);
 	}
 	pthread_mutex_unlock(&mutex);
 
@@ -49,27 +32,36 @@ void* reader(void* arg){
 }
 
 void* writer(void* arg){
-	pthread_mutex_lock(&mutex);
-	writer_count++;
-	if(writer_count==1){
-		read_lock();
-	}
-	pthread_mutex_unlock(&mutex);
+	pthread_mutex_lock(&write_lock);
 
-	printf("Writer %d is writing",*(int*)arg);
+	printf("Writer %d is writing\n",*(int*)arg);
 	sleep(1);
 
-	pthread_mutex_lock(&mutex);
-	writer_count--;
-	if(writer_count==0){
-		read_unlock();
-	}
-	pthread_mutex_unlock(&mutex);
+	pthread_mutex_unlock(&write_lock);
 
 	return NULL;
 }
 
 int main(){
+	pthread_mutex_init(&mutex,NULL);
+	int ids[6]={1,2,3,4,5,6};
+	pthread_t threads[6];
+
+	for(int i =0;i<4;i++){
+		pthread_create(&threads[i],NULL,reader,&ids[i]);
+	}
+
+	for(int i =4;i<6;i++){
+		pthread_create(&threads[i],NULL,writer,&ids[i]);
+	}
+
+	for(int i =0;i<6;i++){
+		pthread_join(threads[i],NULL);
+		
+	}
+	
+	pthread_mutex_destroy(&mutex);
+
 	return EXIT_SUCCESS;
 }
 

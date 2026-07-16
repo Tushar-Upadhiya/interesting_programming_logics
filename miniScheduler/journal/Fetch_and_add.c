@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<stdatomic.h>
 #include<pthread.h>
+#include<sched.h>
 
 typedef struct __spinlock_t{
 	atomic_int ticket;
@@ -17,7 +18,9 @@ void spinlock_init(spinlock_t* lock){
 void spinlock_lock(spinlock_t* lock){
 	int my_ticket = atomic_fetch_add(&lock->ticket,1);
 
-	while(atomic_load(&lock->turn)!=my_ticket);
+	while(atomic_load(&lock->turn)!=my_ticket){
+		sched_yield();
+	};
 }
 
 void spinlock_unlock(spinlock_t* lock){

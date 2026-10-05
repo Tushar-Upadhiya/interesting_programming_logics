@@ -2,6 +2,12 @@
 #include<sys/mman.h>
 #include<unistd.h>
 
+typedef struct BlockHeader{
+	size_t size;
+	bool isfree;
+	struct BlockHeader* next;
+}BlockHeader;
+
 static void* pool_start = NULL;
 static size_t total_pool_size = 0;
 
@@ -26,18 +32,30 @@ static int init_heap_pool(void){
 		pool_start = NULL;
 		return -1;
 	}
+
+	BlockHeader* firstBlock = (BlockHeader* )pool_start;
+	firstBlock->size = total_pool_size - sizeof(BlockHeader);
+	firstBlock->next = NULL;
+	firstBlock->isfree = true;
 	return 0;
 }
 
 void* my_malloc(size_t size){
-	
+	if(pool_start == NULL){
+		if(init_heap_pool()!=0){
+			return NULL;
+		}
+	}
 	return NULL;
 }
 
 void my_free(void* ptr){
-
+	if(pool_start!=NULL){
+		munmap(pool_start, total_pool_size);
+		pool_start = NULL;
+	}
 }
-int main()
+int main(void)
 {
 	return 0;
 }

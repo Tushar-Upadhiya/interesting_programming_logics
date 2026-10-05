@@ -41,10 +41,18 @@ static int init_heap_pool(void){
 }
 
 void* my_malloc(size_t size){
+
+	if (size==0) return NULL;
+
 	if(pool_start == NULL){
 		if(init_heap_pool()!=0){
 			return NULL;
 		}
+	}
+
+	BlockHeader* curr = (BlockHeader* )pool_start;
+	while(curr!=NULL){
+		curr=curr->next;
 	}
 	return NULL;
 }

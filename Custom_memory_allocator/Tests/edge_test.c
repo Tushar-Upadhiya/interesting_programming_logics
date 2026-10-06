@@ -44,11 +44,27 @@ void test_excessive_alloc(void){
     printf("[PASS] Excessive memory allocation returns NULL. \n");
 }
 
+//coalescing test
+void test_coalescing(void){
+    void* a = my_malloc(128);
+    void* b = my_malloc(128);
+    void* c = my_malloc(128);
+
+    my_free(b);
+    my_free(a);
+    my_free(c);
+    void* Big = my_malloc(384);
+    assert(Big!=NULL);
+
+    my_free(Big);
+    printf("[PASS] Coalescing of free blocks works correctly. \n");
+}
 
 int main(void){
     //zero_alloc_test();
     //test_null_free();
     //test_alignment();
-    test_excessive_alloc();
+    //test_excessive_alloc();
+    test_coalescing();
     return 0;
 }

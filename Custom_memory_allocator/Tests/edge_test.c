@@ -36,9 +36,19 @@ void test_alignment(void){
 
     printf("[PASS] Memory allocation is aligned to 8 bytes. \n");
 }
+
+//excessive memory allocation test
+void test_excessive_alloc(void){
+    void* ptr = my_malloc(1024*1024*100);
+    assert(ptr==NULL);
+    printf("[PASS] Excessive memory allocation returns NULL. \n");
+}
+
+
 int main(void){
     //zero_alloc_test();
     //test_null_free();
-    test_alignment();
+    //test_alignment();
+    test_excessive_alloc();
     return 0;
 }

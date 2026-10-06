@@ -59,6 +59,7 @@ void* my_malloc(size_t size){
 		if(curr->isfree&&curr->size>=aligned_size){
 			if(curr->size>= aligned_size+sizeof(BlockHeader)+8){
 				BlockHeader* new_block = (BlockHeader*)((char*)curr+sizeof(BlockHeader)+aligned_size);
+				new_block->size = curr->size - aligned_size-sizeof(BlockHeader);
 				new_block->isfree = true;
 				new_block->next = curr->next;
 

@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<sys/mman.h>
 #include<unistd.h>
+#include<stdbool.h>
+#include<stddef.h>
 
 typedef struct BlockHeader{
 	size_t size;
@@ -51,17 +53,33 @@ void* my_malloc(size_t size){
 	}
 
 	BlockHeader* curr = (BlockHeader* )pool_start;
+	size_t aligned_size = (size+7)&~7;
+
 	while(curr!=NULL){
+		if(curr->isfree&&curr->size>=aligned_size){
+			if(curr->size>= aligned_size+sizeof(BlockHeader)+8){
+				BlockHeader* new_block = (BlockHeader*)(char*)curr+sizeof(BlockHeader)+aligned_size;
+				new_block->isfree = true;
+				new_block->next = curr->next;
+
+				curr->size = aligned_size;
+				curr->isfree=false;
+				curr->next = new_block;
+			}else{
+				curr->isfree=false;
+			}
+				return (void*)(curr+1);
+			}
 		curr=curr->next;
+
 	}
 	return NULL;
 }
 
 void my_free(void* ptr){
-	if(pool_start!=NULL){
-		munmap(pool_start, total_pool_size);
-		pool_start = NULL;
-	}
+	if(ptr==NULL) return;
+	BlockHeader* header = (BlockHeader*)ptr -1;
+	header->isfree = true;
 }
 int main(void)
 {

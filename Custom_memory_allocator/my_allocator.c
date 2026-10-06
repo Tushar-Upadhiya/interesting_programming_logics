@@ -2,7 +2,7 @@
 #include<sys/mman.h>
 #include<unistd.h>
 #include<stdbool.h>
-#include<stddef.h>
+#include "my_allocator.h"
 
 typedef struct BlockHeader{
 	size_t size;
@@ -97,23 +97,4 @@ void my_free(void* ptr){
 	}
 
 }
-int main(void)
-{
-	printf("Allocating 100 bytes.....\n");
-	int *arr = (int*)my_malloc(100*sizeof(int));
-	if(arr==NULL){
-		return -1;
-	}
 
-	for(int i =0;i<100;i++){
-		arr[i]=i*2;
-	}
-
-	printf("arr[50]=%d\n",arr[50]);
-
-	printf("Freeing Memory.......\n");
-	my_free(arr);
-
-	printf("Memory allocated and freed Successfully....\n");
-	return 0;
-}

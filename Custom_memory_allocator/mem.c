@@ -79,11 +79,23 @@ void* my_malloc(size_t size){
 void my_free(void* ptr){
 	if(ptr==NULL) return;
 	BlockHeader* header = (BlockHeader*)ptr -1;
-	header->isfree = true;
+
+		header->isfree = true;
 	if(header->next!=NULL&&header->next->isfree){
 		header->size = header->size+sizeof(BlockHeader)+header->next->size;
 		header->next = header->next->next;
 	}
+
+	BlockHeader* prev = (BlockHeader*)pool_start;
+	while(prev!=NULL&&prev->next!=header){
+		prev=prev->next;
+	}
+
+	if(prev!=NULL && prev->isfree){
+		prev->size = prev->size+sizeof(BlockHeader)+header->size;
+		prev->next = header->next;
+	}
+
 }
 int main(void)
 {

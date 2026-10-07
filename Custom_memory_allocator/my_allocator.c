@@ -2,7 +2,8 @@
 #include<sys/mman.h>
 #include<unistd.h>
 #include<stdbool.h>
-#include "my_allocator.h"
+#include<stddef.h>
+#include<string.h>
 
 typedef struct BlockHeader{
 	size_t size;
@@ -59,6 +60,7 @@ void* my_malloc(size_t size){
 		if(curr->isfree&&curr->size>=aligned_size){
 			if(curr->size>= aligned_size+sizeof(BlockHeader)+8){
 				BlockHeader* new_block = (BlockHeader*)((char*)curr+sizeof(BlockHeader)+aligned_size);
+				new_block->size = curr->size - aligned_size-sizeof(BlockHeader);
 				new_block->isfree = true;
 				new_block->next = curr->next;
 
@@ -74,6 +76,22 @@ void* my_malloc(size_t size){
 
 	}
 	return NULL;
+}
+
+void* my_calloc(size_t num, size_t size){
+	if(size==0||num==0) return NULL;
+	size_t total_size = num*size;
+	if(total_size/num!=size){
+		return NULL;
+	}
+
+	void* ptr = my_malloc(total_size);
+	if(ptr==NULL){
+		return NULL;
+	}
+
+	memset(ptr,0,total_size);
+	return ptr;
 }
 
 void my_free(void* ptr){

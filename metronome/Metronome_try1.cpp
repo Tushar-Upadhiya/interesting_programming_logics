@@ -13,7 +13,7 @@ sf::SoundBuffer highBuffer, lowBuffer;
 
 
 void initSound() {
-    if (!highBuffer.loadFromFile("tick_high.wav") ||  // relative path
+    if (!highBuffer.loadFromFile("tick_low.wav") ||  // relative path
         !lowBuffer.loadFromFile("tick_low.wav")) {
         std::cout << "Error loading sound files!\n";
         exit(1);

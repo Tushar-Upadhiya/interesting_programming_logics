@@ -4,9 +4,24 @@
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
+#define LINE_WIDTH 2
+
+int draw_grid(SDL_Surface* surface,int cell_width, int rows, int columns){
+	for(int i =0;i<rows;i++){
+		SDL_Rect line = (SDL_Rect){0,i*cell_width,SCREEN_WIDTH,LINE_WIDTH};
+		SDL_FillRect(surface,&line,0xffffffff);
+	}
+		for(int i =0;i<rows;i++){
+		SDL_Rect line = (SDL_Rect){i*cell_width,0,LINE_WIDTH,SCREEN_HEIGHT};
+		SDL_FillRect(surface,&line,0xffffffff);
+	}
+
+}
 
 int main(int argc, char* argv[]){
 	printf("Hello conway's game of life.\n");
+	int column = SCREEN_WIDTH/10;
+	int rows = SCREEN_HEIGHT/10;
 	SDL_Window *window = NULL;
 
 	//initializing SDL window
@@ -33,10 +48,8 @@ int main(int argc, char* argv[]){
 
 	
 	SDL_Surface* surface = SDL_GetWindowSurface(window);
-	SDL_Rect rect = (SDL_Rect){30,40,50,60};
-	uint32_t color = 0xffffffff;
-	SDL_FillRect(surface, &rect , color);
-	 SDL_UpdateWindowSurface(window);
+	draw_grid(surface,30,rows,column);
+	SDL_UpdateWindowSurface(window);
 
 	SDL_Event event;
     	int running = 1;
@@ -49,6 +62,5 @@ int main(int argc, char* argv[]){
 
     	SDL_DestroyWindow(window);
    	 SDL_Quit();
-
 	return 0;
 }

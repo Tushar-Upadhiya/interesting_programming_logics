@@ -5,15 +5,25 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define LINE_WIDTH 2
+#define COLOR_GRAY 0x2f2f2f2f
+#define COLOR_WHITE 0xffffffff
+#define CELL_WIDTH 30
+
+int draw_cell(SDL_Surface* surface , int cell_x , int cell_y){
+	int pixel_x = cell_x*CELL_WIDTH;
+	int pixel_y = cell_y*CELL_WIDTH;
+	SDL_Rect cell_rect = (SDL_Rect) {pixel_x, pixel_y, CELL_WIDTH,CELL_WIDTH};
+	SDL_FillRect(surface , &cell_rect,COLOR_WHITE);
+}
 
 int draw_grid(SDL_Surface* surface,int cell_width, int rows, int columns){
 	for(int i =0;i<rows;i++){
 		SDL_Rect line = (SDL_Rect){0,i*cell_width,SCREEN_WIDTH,LINE_WIDTH};
-		SDL_FillRect(surface,&line,0xffffffff);
+		SDL_FillRect(surface,&line,COLOR_GRAY);
 	}
 		for(int i =0;i<rows;i++){
 		SDL_Rect line = (SDL_Rect){i*cell_width,0,LINE_WIDTH,SCREEN_HEIGHT};
-		SDL_FillRect(surface,&line,0xffffffff);
+		SDL_FillRect(surface,&line,COLOR_GRAY);
 	}
 
 }
@@ -48,7 +58,11 @@ int main(int argc, char* argv[]){
 
 	
 	SDL_Surface* surface = SDL_GetWindowSurface(window);
+	int cell_x = 10;
+	int cell_y = 6;
+	draw_cell(surface , cell_x , cell_y);
 	draw_grid(surface,30,rows,column);
+
 	SDL_UpdateWindowSurface(window);
 
 	SDL_Event event;
